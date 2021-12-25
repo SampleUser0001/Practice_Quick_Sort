@@ -14,7 +14,6 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <project.mainClass>practice.QuickSort</project.mainClass>
     <log4j2.version>2.16.0</log4j2.version>
     <junit.version>4.12</junit.version>
     <hamcrest.version>2.1</hamcrest.version>
@@ -54,9 +53,6 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
-        <configuration>
-          <mainClass>${project.mainClass}</mainClass>
-        </configuration>
       </plugin>
 
       <plugin>

@@ -27,10 +27,10 @@ public class QuickSortTest {
     @Test
     public void sortRandomTest() {
 
-        double[] list = new Random().doubles().limit(1000).toArray();
+        int[] list = new Random().ints().limit(1000).toArray();
 
         try {
-            double[] sorted = this.sorter.sort(list);
+            int[] sorted = this.sorter.sort(list);
             Arrays.sort(list);
 
             logger.debug("actural");
@@ -49,16 +49,16 @@ public class QuickSortTest {
 
     @Test
     public void sortTest_01(){
-        check(new double[]{3,1,2});
+        check(new int[]{3,1,2});
     }
     @Test
     public void sortTest_02(){
-        check(new double[]{1,3,2});
+        check(new int[]{1,3,2});
     }
 
-    private void check(double[] list){
+    private void check(int[] list){
         try {
-            double[] sorted = this.sorter.sort(list);
+            int[] sorted = this.sorter.sort(list);
             Arrays.sort(list);
 
             logger.debug("actural");
@@ -75,7 +75,7 @@ public class QuickSortTest {
         }
     }
 
-    private void printList(double[] list){
+    private void printList(int[] list){
         for(int i=0 ; i<list.length ; i++) {
             logger.debug("{},{}", i, list[i]);
         }

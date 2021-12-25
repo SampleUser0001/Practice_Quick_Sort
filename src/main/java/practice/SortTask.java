@@ -12,11 +12,11 @@ public class SortTask implements Runnable {
 
     private ExecutorService exec;
     private CountDownLatch countDownLatch;
-    private double[] list;
+    private int[] list;
     private final int headIndex;
     private final int tailIndex;
 
-    public SortTask(ExecutorService exec, CountDownLatch countDownLatch, double[] list, int headIndex, int tailIndex) {
+    public SortTask(ExecutorService exec, CountDownLatch countDownLatch, int[] list, int headIndex, int tailIndex) {
         this.exec = exec;
         this.countDownLatch = countDownLatch;
         this.list = list;
@@ -53,7 +53,7 @@ public class SortTask implements Runnable {
      * @return 小さい方のうち、一番大きい添字を返す。
      */
     private int divide() {
-        double baseValue = (this.list[this.headIndex] + this.list[tailIndex]) / 2 ;
+        int baseValue = (this.list[this.headIndex] + this.list[tailIndex]) / 2 ;
         int index[] = {this.headIndex, this.tailIndex};
         while(index[0] != index[1]) {
             index = this.swap(baseValue, index[0], index[1]);
@@ -69,7 +69,7 @@ public class SortTask implements Runnable {
      * @param tail 大きい側のインデックス
      * @return
      */
-    private int[] swap(double baseValue, int head, int tail) {
+    private int[] swap(int baseValue, int head, int tail) {
 
         logger.debug("swap start : {}",this.printlog(head, tail));
 
@@ -100,7 +100,7 @@ public class SortTask implements Runnable {
         logger.debug("head: index {} , value : {}", head, list[head]);
         logger.debug("tail: index {} , value : {}", tail, list[tail]);
 
-        double tmp = list[head];
+        int tmp = list[head];
         list[head] = list[tail];
         list[tail] = tmp;
 

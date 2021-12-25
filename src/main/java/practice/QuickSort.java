@@ -22,8 +22,8 @@ public class QuickSort {
         exec = Executors.newFixedThreadPool(threadCount);
     }
 
-    public double[] sort(double[] list) throws InterruptedException {
-        double work[] = new double[list.length];
+    public int[] sort(int[] list) throws InterruptedException {
+        int work[] = new int[list.length];
         CountDownLatch countDownLatch = new CountDownLatch(list.length);
         for(int i=0; i<list.length ;i++){
             work[i] = list[i];
@@ -58,12 +58,12 @@ public class QuickSort {
         int threadCount = Integer.parseInt(args[argsIndex++]);
         QuickSort sorter = new QuickSort(threadCount);
 
-        double[] list = new Random().doubles().limit(size).toArray();
-        // double[] list = {3,1,2};
+        int[] list = new Random().ints().limit(size).toArray();
+        // int[] list = {3,1,2};
 
         long start = System.currentTimeMillis();
         logger.info("sort start.");
-        double[] sorted = sorter.sort(list);
+        int[] sorted = sorter.sort(list);
         logger.info("sort finish.");
         long finish = System.currentTimeMillis();
         logger.info("time : {}", finish-start);
