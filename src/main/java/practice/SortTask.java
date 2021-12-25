@@ -24,12 +24,17 @@ public class SortTask implements Runnable {
         this.tailIndex = tailIndex;
     }
 
+    public SortTask(){
+        this.exec = null;
+        this.countDownLatch = null;
+        this.list = null;
+        this.headIndex = 0;
+        this.tailIndex = 0;
+    }
+
     @Override
     public void run() {
-        logger.debug("before devide : {}", this.printlog(this.headIndex, this.tailIndex));
         int boundaryIndex = this.divide();
-        logger.debug("after devide : {}", this.printlog(this.headIndex, this.tailIndex));
-        logger.debug("after devide : boundaryIndex : {}, headIndex : {}, tailIndex : {}", boundaryIndex, headIndex, tailIndex);
 
         // 要素数が2以上の場合は分割
         // 配列の小さい方
@@ -71,54 +76,27 @@ public class SortTask implements Runnable {
      */
     private int[] swap(int baseValue, int head, int tail) {
 
-        logger.debug("swap start : {}",this.printlog(head, tail));
-
-        logger.debug("before search : head : {} , this.list[head] : {}", head, this.list[head]);
         while(head < tail){
-            logger.trace("head : {} , this.list[head] : {}", head, this.list[head]);
             if (this.list[head] >= baseValue){
-                logger.trace("head : break");
                 break;
             } else {
                 head++;
             }
         }
-        logger.debug("after search : head : {}", head);
 
-        logger.debug("before search : tail : {} , this.list[tail] : {}", tail, this.list[tail]);
         while(head < tail){
-            logger.trace("tail : {} , this.list[tail] : {}", tail, this.list[tail]);
             if (this.list[tail] < baseValue){
-                logger.trace("tail : break");
                 break;
             } else {
                 tail--;
             }
         }
-        logger.debug("after search : tail : {}", tail);
-        
-        logger.debug("head: index {} , value : {}", head, list[head]);
-        logger.debug("tail: index {} , value : {}", tail, list[tail]);
 
         int tmp = list[head];
         list[head] = list[tail];
         list[tail] = tmp;
 
-        logger.debug("swap finish : {}",this.printlog(head, tail));
         return new int[]{head, tail};
     }
 
-    private String printlog(int head, int tail) {
-        StringBuffer buf = new StringBuffer();
-        buf.append("headIndex : " + head + " , tailIndex : " + tail + " , ");
-        buf.append("list : [");
-        for(int i = head ; i<=tail ; i++) {
-            buf.append(this.list[i]);
-            if(i != tail){
-                buf.append(", ");
-            }
-        }
-        buf.append("]");
-        return buf.toString();
-    }
 }

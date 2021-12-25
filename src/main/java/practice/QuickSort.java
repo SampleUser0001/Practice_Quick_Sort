@@ -68,6 +68,15 @@ public class QuickSort {
         long finish = System.currentTimeMillis();
         logger.info("time : {}", finish-start);
 
+        // もしかして・・・new遅い？
+        start = System.currentTimeMillis();
+        for(int i=0;i<size*2;i++){
+            new SortTask();
+        }
+        finish = System.currentTimeMillis();
+        logger.info("time : {}", finish-start);
+
+
         start = System.currentTimeMillis();
         logger.info("measurement start.");
         Arrays.sort(list);
