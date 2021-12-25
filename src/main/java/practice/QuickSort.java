@@ -1,5 +1,6 @@
 package practice;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -7,6 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 /**
  * クイックソートする
@@ -16,8 +18,8 @@ public class QuickSort {
 
     private ExecutorService exec;
 
-    public QuickSort() {
-        exec = Executors.newCachedThreadPool();
+    public QuickSort(int threadCount) {
+        exec = Executors.newFixedThreadPool(threadCount);
     }
 
     public double[] sort(double[] list) throws InterruptedException {
@@ -52,24 +54,36 @@ public class QuickSort {
     public static void main( String[] args ) throws InterruptedException {
         logger.info("app start.");
         int argsIndex = 0;
-        QuickSort sorter = new QuickSort();
-
         int size = Integer.parseInt(args[argsIndex++]);
-        double[] list = new Random().doubles().limit(size).toArray();
+        int threadCount = Integer.parseInt(args[argsIndex++]);
+        QuickSort sorter = new QuickSort(threadCount);
 
+        double[] list = new Random().doubles().limit(size).toArray();
+        // double[] list = {3,1,2};
+
+        long start = System.currentTimeMillis();
         logger.info("sort start.");
         double[] sorted = sorter.sort(list);
         logger.info("sort finish.");
+        long finish = System.currentTimeMillis();
+        logger.info("time : {}", finish-start);
 
-        logger.info("before : ");
-        for(int i=0 ; i<list.length ; i++){
-            logger.info("{} : {} ", i, list[i]);
-        }
-        logger.info("after : ");
-        for(int i=0; i<sorted.length ; i++){
-            logger.info("{} : {} ", i, sorted[i]);
-        }
-        logger.info("app finish.");
+        start = System.currentTimeMillis();
+        logger.info("measurement start.");
+        Arrays.sort(list);
+        logger.info("measurement finish.");
+        finish = System.currentTimeMillis();
+        logger.info("time : {}", finish-start);
+
+        // logger.info("before : ");
+        // for(int i=0 ; i<list.length ; i++){
+        //     logger.info("{} : {} ", i, list[i]);
+        // }
+        // logger.info("after : ");
+        // for(int i=0; i<sorted.length ; i++){
+        //     logger.info("{} : {} ", i, sorted[i]);
+        // }
+        // logger.info("app finish.");
        
     }
 }

@@ -71,7 +71,7 @@ public class SortTask implements Runnable {
      */
     private int[] swap(double baseValue, int head, int tail) {
 
-        logger.debug("baseValue : {} , head : {} , tail : {}", baseValue, head, tail);
+        logger.debug("swap start : {}",this.printlog(head, tail));
 
         logger.debug("before search : head : {} , this.list[head] : {}", head, this.list[head]);
         while(head < tail){
@@ -104,6 +104,7 @@ public class SortTask implements Runnable {
         list[head] = list[tail];
         list[tail] = tmp;
 
+        logger.debug("swap finish : {}",this.printlog(head, tail));
         return new int[]{head, tail};
     }
 
